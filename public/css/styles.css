@@ -1,6 +1,626 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* =========================
+   CSS VARIABLES 
+   ========================= */
+:root {
+  /* =========================
+     BRAND COLORS
+     ========================= */
+  --color-brand-primary: #00a9c6;   /* Teal blue used for buttons & highlights */
+  --color-brand-secondary: #1f3a4a; /* Dark blue-gray used in navigation bar */
+  --color-brand-accent: #00d4ff;    /* Bright cyan accent for links & emphasis */
+
+  /* =========================
+     BACKGROUND COLORS
+     ========================= */
+  --color-bg-page: #ffffff;         /* Main page background */
+  --color-bg-nav: #1f3a4a;          /* Navigation bar background */
+  --color-bg-card: #f5f7f8;         /* Light card / section background */
+  --color-bg-footer: #ffffff;       /* Footer background */
+
+  /* =========================
+     TEXT COLORS
+     ========================= */
+  --color-text-primary: #000000;     /* Main headings & body text */
+  --color-text-secondary: #444444;   /* Subtext and descriptions */
+  --color-text-inverse: #ffffff;     /* Text on dark backgrounds */
+  --color-text-link: #00a9c6;        /* Clickable links */
+
+  /* =========================
+     BUTTON COLORS
+     ========================= */
+  --color-btn-primary-bg: #00a9c6;   /* "Own Today" button background */
+  --color-btn-primary-text: #ffffff; /* Button text */
+  --color-btn-primary-hover: #0089a3;/* Button hover state */
+
+  /* =========================
+     BORDER & DIVIDER COLORS
+     ========================= */
+  --color-border-light: #dddddd;     /* Light borders around cards */
+  --color-border-dark: #1f3a4a;      /* Dark borders / outlines */
+
+  /* =========================
+     ICON & IMAGE ACCENTS
+     ========================= */
+  --color-icon-bg: #e6f7fb;          /* Icon tile background */
+  --color-icon-border: #00a9c6;      /* Icon border color */
+}
+
+/* =========================
+   RESET & BASE STYLES
+   ========================= */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+    background-image: url('/images/site/checkerboard.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-color: #f0f0f0; /* Fallback color if image doesn't load */
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT & CONTAINERS
+   ========================= */
+#wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border: 4px solid #00a9c6;
+    border-radius: 8px;
+    min-height: calc(100vh - 40px);
+    position: relative;
+}
+
+/* =========================
+   HEADER STYLES
+   ========================= */
+header {
+  background-color: var(--color-bg-page);
+  padding: 20px 0;
+  border-bottom: 3px solid var(--color-brand-primary);
+  position: relative;
+  background-image: url('/images/header-bg.jpg'); /* Optional header background */
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+header h1 {
+  font-family: 'Montserrat', 'Arial Black', sans-serif;
+  font-size: 2.5rem;
+  color: var(--color-brand-secondary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+}
+
+/* =========================
+   NAVIGATION STYLES
+   ========================= */
+nav {
+  background-color: var(--color-bg-nav);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.nav-link {
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  padding: 18px 25px;
+  display: block;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-brand-accent);
+}
+
+.nav-link:first-child {
+  background-color: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+}
+
+.nav-link:first-child:hover {
+  background-color: var(--color-btn-primary-hover);
+}
+
+.nav-link:not(:first-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================
+   HERO SECTION
+   ========================= */
+.hero {
+  background: linear-gradient(rgba(31, 58, 74, 0.85), rgba(31, 58, 74, 0.9)),
+              url('/public/images/site/checkerboard.jpg') center center / cover no-repeat;
+  color: var(--color-text-inverse);
+  padding: 60px 40px;
+  border-radius: 15px;
+  margin: 40px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0, 169, 198, 0.2), rgba(0, 212, 255, 0.1));
+  z-index: 1;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--color-text-inverse);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-text h3 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: var(--color-brand-accent);
+}
+
+.features {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.features li {
+  padding: 12px 0;
+  font-size: 1.2rem;
+  position: relative;
+  padding-left: 35px;
+}
+
+.features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-brand-accent);
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.btn-own {
+  display: inline-block;
+  background-color: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
+  padding: 15px 40px;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 169, 198, 0.3);
+}
+
+.btn-own:hover {
+  background-color: var(--color-btn-primary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 169, 198, 0.4);
+}
+
+.hero-image {
+  flex: 1;
+  max-width: 500px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border: 3px solid var(--color-brand-primary);
+}
+
+/* =========================
+   REVIEWS SECTION
+   ========================= */
+.reviews {
+  padding: 50px 20px;
+  background-color: var(--color-bg-card);
+  border-radius: 15px;
+  margin: 40px 0;
+  background-image: url('/images/reviews-bg.jpg'); /* Optional subtle pattern */
+  background-blend-mode: multiply;
+  background-color: rgba(245, 247, 248, 0.9);
+}
+
+.reviews h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: var(--color-brand-secondary);
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.reviews h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: var(--color-brand-primary);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.review-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid var(--color-brand-primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.review-text {
+  font-style: italic;
+  margin-bottom: 15px;
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.review-rating {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  text-align: right;
+  font-size: 1.2rem;
+}
+
+/* =========================
+   UPGRADES SECTION
+   ========================= */
+.upgrades {
+  padding: 50px 20px;
+  background-color: white;
+  border-radius: 15px;
+  margin: 40px 0;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  background-image: url('/images/upgrades-bg.jpg'); /* Optional tech pattern */
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.upgrades h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: var(--color-brand-secondary);
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.upgrades h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: var(--color-brand-primary);
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.upgrade-card {
+  text-align: center;
+  padding: 25px;
+  background: var(--color-icon-bg);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--color-icon-border);
+}
+
+.upgrade-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 169, 198, 0.2);
+  background-color: white;
+}
+
+.upgrade-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 2px solid var(--color-border-light);
+}
+
+.upgrade-card h3 {
+  font-size: 1.3rem;
+  color: var(--color-brand-secondary);
+  font-weight: 600;
+}
+
+/* =========================
+   FOOTER STYLES
+   ========================= */
+footer {
+  background-color: var(--color-bg-footer);
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+  border-top: 3px solid var(--color-brand-primary);
+  background-image: url('/images/footer-bg.jpg'); /* Optional footer background */
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+footer p {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+/* =========================
+   MOBILE HAMBURGER MENU
+   ========================= */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 15px;
+  background: none;
+  border: none;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: var(--color-text-inverse);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+@media screen and (min-width: 768px) {
+  .hero-content {
+    flex-direction: row;
+  }
+  
+  .review-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .review-card:nth-child(4),
+  .review-card:nth-child(5) {
+    grid-column: span 1;
+  }
+  
+  .upgrade-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .review-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .review-card:nth-child(4),
+  .review-card:nth-child(5) {
+    grid-column: span 1;
+  }
+  
+  .hero h2 {
+    font-size: 3.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hamburger {
+    display: flex;
+  }
+  
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg-nav);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .nav-menu.active {
+    display: flex;
+  }
+  
+  .nav-link {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-link:not(:first-child)::after {
+    display: none;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  .hero {
+    padding: 40px 20px;
+  }
+  
+  .hero h2 {
+    font-size: 2.2rem;
+  }
+  
+  .upgrade-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   ACCESSIBILITY IMPROVEMENTS
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus {
+  outline: 3px solid var(--color-brand-accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 20px;
+  background: var(--color-brand-primary);
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 20px;
+}
+
+/* =========================
+   PRINT STYLES
+   ========================= */
+@media print {
+  .btn-own,
+  .hamburger,
+  .nav-link:not(:first-child) {
+    display: none;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .hero {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
+
