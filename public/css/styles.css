@@ -149,11 +149,11 @@ nav {
 }
 
 .nav-link {
-  color: var(--color-text-inverse);
+  color: #ffffff !important;;
   text-decoration: none;
   padding: 18px 25px;
   display: block;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -162,8 +162,8 @@ nav {
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--color-brand-accent);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff !important;;
 }
 
 .nav-link:first-child {
@@ -222,8 +222,8 @@ nav {
   font-size: 2.8rem;
   margin-bottom: 30px;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: var(--color-text-inverse);
+  color: #ffffff !important; /* Pure white for maximum contrast */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
@@ -241,7 +241,8 @@ nav {
 .hero-text h3 {
   font-size: 2.2rem;
   margin-bottom: 20px;
-  color: var(--color-brand-accent);
+  color: #00d4ff !important; /* Use brighter accent color */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .features {
@@ -267,23 +268,24 @@ nav {
 
 .btn-own {
   display: inline-block;
-  background-color: var(--color-btn-primary-bg);
-  color: var(--color-btn-primary-text);
+  background-color: #0089a3; /* Darker teal for better contrast */
+
+  color: #ffffff;
   padding: 15px 40px;
   text-decoration: none;
   border-radius: 50px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.2rem;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 169, 198, 0.3);
+  box-shadow: 0 4px 0 #006a7a;;
 }
 
 .btn-own:hover {
-  background-color: var(--color-btn-primary-hover);
+  background-color: #006a7a;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 169, 198, 0.4);
 }
@@ -301,146 +303,225 @@ nav {
   border: 3px solid var(--color-brand-primary);
 }
 
-/* =========================
-   REVIEWS SECTION
-   ========================= */
-.reviews {
-  padding: 50px 20px;
-  background-color: var(--color-bg-card);
-  border-radius: 15px;
-  margin: 40px 0;
-  background-image: url('/images/reviews-bg.jpg'); /* Optional subtle pattern */
-  background-blend-mode: multiply;
-  background-color: rgba(245, 247, 248, 0.9);
-}
 
-.reviews h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.2rem;
-  margin-bottom: 40px;
-  color: var(--color-brand-secondary);
-  text-align: center;
-  position: relative;
-  padding-bottom: 15px;
-}
-
-.reviews h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background-color: var(--color-brand-primary);
-}
-
-.review-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 25px;
-}
-
-.review-card {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  border-left: 5px solid var(--color-brand-primary);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.review-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.review-text {
-  font-style: italic;
-  margin-bottom: 15px;
-  color: var(--color-text-secondary);
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.review-rating {
-  font-weight: 700;
-  color: var(--color-brand-primary);
-  text-align: right;
-  font-size: 1.2rem;
-}
 
 /* =========================
-   UPGRADES SECTION
+   REVIEWS & UPGRADES CONTAINER
    ========================= */
+
+.reviews-upgrades-container {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+    align-items: flex-start;
+}
+
+/* LEFT SIDE: Upgrades (takes more space) */
 .upgrades {
-  padding: 50px 20px;
-  background-color: white;
-  border-radius: 15px;
-  margin: 40px 0;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  background-image: url('/images/upgrades-bg.jpg'); /* Optional tech pattern */
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
-  background-color: rgba(255, 255, 255, 0.95);
+    flex: 1.5; /* Takes more space than reviews */
+    min-width: 0;
 }
 
-.upgrades h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.2rem;
-  margin-bottom: 40px;
-  color: var(--color-brand-secondary);
-  text-align: center;
-  position: relative;
-  padding-bottom: 15px;
+/* RIGHT SIDE: Reviews (takes less space) */
+.reviews {
+    flex: 1;
+    min-width: 0;
+    margin: 0; /* Remove existing margins */
 }
 
-.upgrades h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background-color: var(--color-brand-primary);
-}
-
+/* =========================
+   UPGRADES GRID (LEFT SIDE)
+   ========================= */
 .upgrade-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .upgrade-card {
-  text-align: center;
-  padding: 25px;
-  background: var(--color-icon-bg);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  border: 2px solid var(--color-icon-border);
+    text-align: center;
+    padding: 20px;
+    background: var(--color-icon-bg);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--color-icon-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .upgrade-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 169, 198, 0.2);
-  background-color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 169, 198, 0.2);
+    background-color: white;
 }
 
 .upgrade-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border: 2px solid var(--color-border-light);
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 2px solid var(--color-border-light);
 }
 
 .upgrade-card h3 {
-  font-size: 1.3rem;
-  color: var(--color-brand-secondary);
-  font-weight: 600;
+    font-size: 1.2rem;
+    color:  #1a2f3c; /* Darker version of your secondary color */
+
+    font-weight: 600;
+    margin-top: auto;
+}
+
+/* =========================
+   REVIEWS LIST (RIGHT SIDE)
+   ========================= */
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.review-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid var(--color-brand-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.review-text {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #333333;;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+}
+
+.review-rating {
+    font-weight: 800;
+    color: #0089a3; /* Darker teal for better contrast */
+    text-align: right;
+    font-size: 1.3rem;
+}
+
+/* =========================
+   RESPONSIVE ADJUSTMENTS
+   ========================= */
+@media screen and (min-width: 768px) {
+    /* Tablet: Keep side-by-side but adjust proportions */
+    .reviews-upgrades-container {
+        gap: 30px;
+    }
+    
+    .upgrade-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* Desktop: Optimal side-by-side layout */
+    .reviews-upgrades-container {
+        gap: 50px;
+    }
+    
+    .upgrades {
+        flex: 1.5; /* Left side takes 60% */
+    }
+    
+    .reviews {
+        flex: 1; /* Right side takes 40% */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* Mobile: Stack sections vertically */
+    .reviews-upgrades-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    /* On mobile, both sections take full width */
+    .upgrades,
+    .reviews {
+        width: 100%;
+    }
+    
+    /* Adjust upgrade grid for mobile */
+    .upgrade-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .upgrade-card {
+        padding: 15px;
+    }
+    
+    .upgrade-card img {
+        height: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Small mobile: Single column for upgrades */
+    .upgrade-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+/* =========================
+   RESPONSIVE ADJUSTMENTS
+   ========================= */
+@media screen and (min-width: 768px) {
+    /* Keep existing tablet+ styles */
+    .review-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .upgrade-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* Widescreen: reviews and upgrades are already side-by-side
+       thanks to the flex container above */
+    .review-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns in widescreen */
+    }
+    
+    .upgrade-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* Mobile: stack sections vertically */
+    .reviews-upgrades-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    /* Adjust grids for mobile */
+    .review-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+    
+    .upgrade-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
 }
 
 /* =========================
@@ -490,7 +571,8 @@ footer p {
    RESPONSIVE DESIGN
    ========================= */
 @media screen and (min-width: 768px) {
-  .hero-content {
+
+    .hero-content {
     flex-direction: row;
   }
   
@@ -624,3 +706,21 @@ footer p {
   }
 }
 
+@media (max-width: 768px) {
+  body, .container, .main-content {
+    background-image: none !important;
+    background-color: #fff; /* or desired solid color */
+  }
+}
+
+reviews-upgrades-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .reviews-upgrades-container {
+    flex-direction: column;
+  }
+}
