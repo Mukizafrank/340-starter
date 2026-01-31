@@ -65,7 +65,7 @@ body {
     background-attachment: fixed;
     background-color: #f0f0f0; /* Fallback color if image doesn't load */
     margin: 0;
-    padding: 20px;
+    padding: 0;
     min-height: 100vh;
 }
 
@@ -73,16 +73,15 @@ body {
    LAYOUT & CONTAINERS
    ========================= */
 #wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+ max-width: 1200px;
+    margin: 20px auto;
+    padding: 0;
     background-color: white;
     border: 4px solid #00a9c6;
     border-radius: 8px;
     min-height: calc(100vh - 40px);
     position: relative;
+    overflow: hidden; 
 }
 
 /* =========================
@@ -139,17 +138,28 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+  position: relative;
 }
 
-.nav-menu {
+.nav-container > ul {
   list-style: none;
   display: flex;
   justify-content: center;
   gap: 0;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-link {
-  color: #ffffff !important;;
+.nav-container > ul > li {
+  display: flex;
+}
+
+.nav-container a {
+  color: #ffffff !important;
   text-decoration: none;
   padding: 18px 25px;
   display: block;
@@ -161,21 +171,22 @@ nav {
   position: relative;
 }
 
-.nav-link:hover {
+.nav-container a:hover {
   background-color: rgba(255, 255, 255, 0.15);
-  color: #ffffff !important;;
+  color: #ffffff !important;
 }
 
-.nav-link:first-child {
+.nav-container > ul > li:first-child > a {
   background-color: var(--color-brand-primary);
-  color: var(--color-text-inverse);
+  color: var(--color-text-inverse) !important;
 }
 
-.nav-link:first-child:hover {
+.nav-container > ul > li:first-child > a:hover {
   background-color: var(--color-btn-primary-hover);
 }
 
-.nav-link:not(:first-child)::after {
+/* CHANGE: Vertical separator uses ::before instead of ::after */
+.nav-container > ul > li:not(:first-child) > a::before {
   content: '';
   position: absolute;
   right: 0;
@@ -186,6 +197,143 @@ nav {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* =========================
+   ACTIVE NAVIGATION STYLES - FIXED
+   ========================= */
+.nav-container a.active {
+    background-color: var(--color-brand-primary) !important;
+    color: var(--color-text-inverse) !important;
+    font-weight: bold;
+    position: relative;
+}
+
+/* CHANGE: Active indicator uses ::after with !important to override */
+.nav-container a.active::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 20% !important;
+    width: 60% !important;
+    height: 3px !important;
+    background-color: #ffffff !important;
+    border-radius: 2px !important;
+    z-index: 10 !important;
+}
+
+/* CHANGE: Remove vertical separator when link is active */
+.nav-container a.active::before {
+    display: none !important;
+}
+
+
+
+/* =========================
+   HAMBURGER MENU STYLES
+   ========================= */
+.hamburger {
+  display: none; /* Hidden by default on desktop */
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 15px;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1002;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: var(--color-text-inverse);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.hamburger.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-6px, -6px);
+}
+
+/* =========================
+   RESPONSIVE DESIGN (768px and below)
+   ========================= */
+@media screen and (max-width: 768px) {
+  .nav-container {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+  
+  .hamburger {
+    display: flex; /* Show hamburger on mobile */
+  }
+  
+  .nav-container > ul {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--color-bg-nav);
+    padding-top: 80px;
+    transition: left 0.3s ease;
+    z-index: 1001;
+    justify-content: flex-start;
+    overflow-y: auto;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .nav-container > ul.active {
+    left: 0;
+  }
+  
+  /* Remove separators on mobile */
+  .nav-container > ul > li:not(:first-child) > a::after {
+    display: none;
+  }
+  
+  /* Make sure all links are full width on mobile */
+  .nav-container a {
+    width: 100%;
+    text-align: left;
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Remove any overflow/scroll issues */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Optional overlay when menu is open */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .nav-overlay.active {
+    display: block;
+  }
+}
 /* =========================
    HERO SECTION
    ========================= */
@@ -303,6 +451,44 @@ nav {
   border: 3px solid var(--color-brand-primary);
 }
 
+/* =========================
+  Hero RESPONSIVE DESIGN
+   ========================= */
+@media screen and (min-width: 768px) {
+
+    .hero-content {
+    flex-direction: row;
+  }
+  
+  .review-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .review-card:nth-child(4),
+  .review-card:nth-child(5) {
+    grid-column: span 1;
+  }
+  
+  .upgrade-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .review-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .review-card:nth-child(4),
+  .review-card:nth-child(5) {
+    grid-column: span 1;
+  }
+  
+  .hero h2 {
+    font-size: 3.2rem;
+  }
+}
+
 
 
 /* =========================
@@ -414,115 +600,6 @@ nav {
     font-size: 1.3rem;
 }
 
-/* =========================
-   RESPONSIVE ADJUSTMENTS
-   ========================= */
-@media screen and (min-width: 768px) {
-    /* Tablet: Keep side-by-side but adjust proportions */
-    .reviews-upgrades-container {
-        gap: 30px;
-    }
-    
-    .upgrade-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    /* Desktop: Optimal side-by-side layout */
-    .reviews-upgrades-container {
-        gap: 50px;
-    }
-    
-    .upgrades {
-        flex: 1.5; /* Left side takes 60% */
-    }
-    
-    .reviews {
-        flex: 1; /* Right side takes 40% */
-    }
-}
-
-@media screen and (max-width: 767px) {
-    /* Mobile: Stack sections vertically */
-    .reviews-upgrades-container {
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    /* On mobile, both sections take full width */
-    .upgrades,
-    .reviews {
-        width: 100%;
-    }
-    
-    /* Adjust upgrade grid for mobile */
-    .upgrade-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .upgrade-card {
-        padding: 15px;
-    }
-    
-    .upgrade-card img {
-        height: 120px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    /* Small mobile: Single column for upgrades */
-    .upgrade-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
-
-/* =========================
-   RESPONSIVE ADJUSTMENTS
-   ========================= */
-@media screen and (min-width: 768px) {
-    /* Keep existing tablet+ styles */
-    .review-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .upgrade-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    /* Widescreen: reviews and upgrades are already side-by-side
-       thanks to the flex container above */
-    .review-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns in widescreen */
-    }
-    
-    .upgrade-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 767px) {
-    /* Mobile: stack sections vertically */
-    .reviews-upgrades-container {
-        flex-direction: column;
-        gap: 30px;
-    }
-    
-    /* Adjust grids for mobile */
-    .review-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-    }
-    
-    .upgrade-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-    }
-}
 
 /* =========================
    FOOTER STYLES
@@ -546,110 +623,7 @@ footer p {
   font-size: 1rem;
 }
 
-/* =========================
-   MOBILE HAMBURGER MENU
-   ========================= */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 15px;
-  background: none;
-  border: none;
-}
 
-.bar {
-  width: 30px;
-  height: 3px;
-  background-color: var(--color-text-inverse);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* =========================
-   RESPONSIVE DESIGN
-   ========================= */
-@media screen and (min-width: 768px) {
-
-    .hero-content {
-    flex-direction: row;
-  }
-  
-  .review-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .review-card:nth-child(4),
-  .review-card:nth-child(5) {
-    grid-column: span 1;
-  }
-  
-  .upgrade-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .review-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  
-  .review-card:nth-child(4),
-  .review-card:nth-child(5) {
-    grid-column: span 1;
-  }
-  
-  .hero h2 {
-    font-size: 3.2rem;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .hamburger {
-    display: flex;
-  }
-  
-  .nav-menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--color-bg-nav);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .nav-menu.active {
-    display: flex;
-  }
-  
-  .nav-link {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .nav-link:not(:first-child)::after {
-    display: none;
-  }
-  
-  header h1 {
-    font-size: 2rem;
-  }
-  
-  .hero {
-    padding: 40px 20px;
-  }
-  
-  .hero h2 {
-    font-size: 2.2rem;
-  }
-  
-  .upgrade-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* =========================
    ACCESSIBILITY IMPROVEMENTS
@@ -723,4 +697,207 @@ reviews-upgrades-container {
   .reviews-upgrades-container {
     flex-direction: column;
   }
+}
+
+
+/* =========================
+   VEHICLE DETAIL PAGE - IMPROVED RESPONSIVENESS
+   ========================= */
+
+.vehicle-detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--color-bg-card);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.vehicle-image {
+    width: 100%;
+    text-align: center;
+}
+
+.vehicle-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 3px solid var(--color-border-light);
+}
+
+.no-image {
+    width: 100%;
+    height: 300px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+    font-size: 1.1rem;
+    border: 2px dashed #ddd;
+}
+
+.vehicle-info {
+    width: 100%;
+}
+
+.vehicle-info h2 {
+    color: var(--color-brand-primary);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+.vehicle-info p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.vehicle-info strong {
+    color: var(--color-brand-secondary);
+    font-weight: 600;
+}
+
+.description {
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-brand-primary);
+}
+
+.description h3 {
+    color: var(--color-brand-secondary);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.description p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.specs {
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-brand-accent);
+}
+
+.specs h3 {
+    color: var(--color-brand-secondary);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.specs p {
+    margin: 8px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.specs p:last-child {
+    border-bottom: none;
+}
+
+.back-btn {
+    display: inline-block;
+    background: var(--color-brand-secondary);
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.back-btn:hover {
+    background: var(--color-btn-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   RESPONSIVE DESIGN FOR VEHICLE DETAIL
+   ========================= */
+
+/* Tablet and larger (768px and up) */
+@media screen and (min-width: 768px) {
+    .vehicle-detail-container {
+        flex-direction: row;
+        gap: 40px;
+        margin: 30px 0;
+        padding: 30px;
+    }
+    
+    .vehicle-image {
+        flex: 1;
+        min-width: 300px;
+        max-width: 500px;
+    }
+    
+    .vehicle-info {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .vehicle-info h2 {
+        font-size: 2.2rem;
+    }
+    
+    .description, .specs {
+        padding: 20px;
+    }
+}
+
+/* Desktop (1024px and up) */
+@media screen and (min-width: 1024px) {
+    .vehicle-detail-container {
+        max-width: 1000px;
+        margin: 40px auto;
+    }
+    
+    .vehicle-info h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Small mobile devices (480px and below) */
+@media screen and (max-width: 480px) {
+    .vehicle-detail-container {
+        padding: 15px;
+        margin: 10px 0;
+    }
+    
+    .vehicle-info h2 {
+        font-size: 1.5rem;
+    }
+    
+    .vehicle-info p {
+        font-size: 1rem;
+    }
+    
+    .description, .specs {
+        padding: 12px;
+    }
+    
+    .back-btn {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
 }
