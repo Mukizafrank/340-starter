@@ -99,6 +99,25 @@ header {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.siteName {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#accountLink {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--color-text-link);
+  font-size: 1.1rem;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -901,3 +920,175 @@ reviews-upgrades-container {
         padding: 15px;
     }
 }
+/* =========================
+   LOGIN & ACCOUNT STYLES
+   ========================= */
+
+.login-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--color-bg-card);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-container h1 {
+  color: var(--color-brand-secondary);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--color-text-secondary);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--color-brand-primary);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 169, 198, 0.3);
+}
+
+.btn-primary {
+  background-color: var(--color-brand-primary);
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 169, 198, 0.3);
+}
+
+.register-link {
+  margin-top: 25px;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.register-link a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.register-link a:hover {
+  color: var(--color-brand-accent);
+  text-decoration: underline;
+}
+
+/* Flash Messages */
+.notice {
+    color: #9c2b2e;
+    padding: 15px;
+    background-color: #fce4e4;
+    border: 1px solid #fcc2c3;
+    list-style-type: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.notice ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Registration Form Styles */
+#registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.password-requirements {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 5px;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.show-password-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--color-brand-primary);
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+}
+
+.show-password-btn:hover {
+    text-decoration: underline;
+}
+
+/* Update login form to align with new password wrapper */
+#loginForm .password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================
+   FORM VALIDATION STYLES
+   ========================= */
+input:required:invalid, input:focus:invalid {
+    border-color: #d9534f; /* Bootstrap danger color */
+    background-color: #fdf7f7;
+    box-shadow: 0 0 5px rgba(217, 83, 79, 0.3);
+}
+
+input:required:valid {
+    border-color: #28a745; /* Bootstrap success color */
+    background-color: #f8fff9;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
