@@ -26,7 +26,7 @@ app.use(session({
     createTableIfMissing: true,
     pool,
   }),
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || "secret",
   resave: true,
   saveUninitialized: true,
   name: 'sessionId',
