@@ -1,0 +1,70 @@
+<%# Account Update View %>
+    <div class="account-update-container">
+        <h1>
+            <%= title %>
+        </h1>
+        <%- messages() %>
+            <% if (locals.errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <h2>Update Account Information</h2>
+                    <form id="updateAccountForm" action="/account/update" method="post">
+                        <div class="form-group">
+                            <label for="account_firstname">First Name:</label>
+                            <input type="text" id="account_firstname" name="account_firstname" required
+                                value="<%= locals.account_firstname != null ? account_firstname : '' %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="account_lastname">Last Name:</label>
+                            <input type="text" id="account_lastname" name="account_lastname" required
+                                value="<%= locals.account_lastname != null ? account_lastname : '' %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="account_email">Email:</label>
+                            <input type="email" id="account_email" name="account_email" required
+                                value="<%= locals.account_email != null ? account_email : '' %>">
+                        </div>
+                        <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+                        <button type="submit" class="btn-primary">UPDATE ACCOUNT</button>
+                    </form>
+
+                    <hr>
+
+                    <h2>Change Password</h2>
+                    <form id="changePasswordForm" action="/account/update-password" method="post">
+                        <div class="form-group">
+                            <label for="account_password">New Password:</label>
+                            <span class="password-requirements">Password must be at least 12 characters and include 1
+                                uppercase, 1 lowercase, 1 number, and 1 special character.</span>
+                            <div class="password-wrapper">
+                                <input type="password" id="account_password" name="account_password" required
+                                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{12,}$"
+                                    placeholder="Enter new password">
+                                <button type="button" class="show-password-btn" onclick="togglePassword()">Show</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+                        <button type="submit" class="btn-primary">CHANGE PASSWORD</button>
+                    </form>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("account_password");
+            const btn = document.querySelector(".show-password-btn");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                btn.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                btn.textContent = "Show";
+            }
+        }
+    </script>

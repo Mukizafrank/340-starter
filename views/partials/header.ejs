@@ -1,4 +1,12 @@
 <header id="top-header">
     <span class="siteName">CSE Motors</span>
-    <a id="accountLink" href="/account/login" title="Click to log in">My Account</a>
+    <div id="tools">
+        <% if (locals.loggedin) { %>
+            <a id="accountLink" href="/account/" title="Click to manage your account">Welcome <%=
+                    locals.accountData.account_firstname %></a>
+            <a id="logoutLink" href="/account/logout" title="Click to log out">Logout</a>
+            <% } else { %>
+                <a id="accountLink" href="/account/login" title="Click to log in">My Account</a>
+                <% } %>
+    </div>
 </header>
