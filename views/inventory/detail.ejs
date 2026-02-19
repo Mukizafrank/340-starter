@@ -36,9 +36,12 @@
                 <% } %>
             </div>
             
-            <a href="javascript:history.back()" class="back-btn">
-                ← Back to Vehicles
-            </a>
+            <div class="detail-actions">
+                <button class="fav-toggle" data-inv-id="<%= vehicle.inv_id %>" aria-label="Save vehicle" aria-pressed="false">Save</button>
+                <a href="javascript:history.back()" class="back-btn">
+                    ← Back to Vehicles
+                </a>
+            </div>
         </div>
     </div>
 <% } else { %>

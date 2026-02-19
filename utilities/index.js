@@ -49,6 +49,8 @@ Util.buildClassificationGrid = async function (data) {
       grid += '</h2>'
       grid += '<span>$'
         + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      // Favorite toggle button (handled client-side via /js/favorites.js)
+      grid += '<button class="fav-toggle" data-inv-id="' + vehicle.inv_id + '" aria-label="Save vehicle" aria-pressed="false">Save</button>'
       grid += '</div>'
       grid += '</li>'
     })

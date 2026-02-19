@@ -2,8 +2,8 @@
     <span class="siteName">CSE Motors</span>
     <div id="tools">
         <% if (locals.loggedin) { %>
-            <a id="accountLink" href="/account/" title="Click to manage your account">Welcome <%=
-                    locals.accountData.account_firstname %></a>
+            <a id="accountLink" href="/account/" title="Click to manage your account">Welcome <%= locals.accountData.account_firstname %></a>
+            <a id="favoritesLink" href="/favorites" title="Click to view saved vehicles">My Saved Vehicles</a>
             <a id="logoutLink" href="/account/logout" title="Click to log out">Logout</a>
             <% } else { %>
                 <a id="accountLink" href="/account/login" title="Click to log in">My Account</a>
